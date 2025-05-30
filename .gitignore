@@ -49,3 +49,4 @@ profile
 code_unfinished/*
 thirdparties/
 code/parser/generated/*
+/.cmake
