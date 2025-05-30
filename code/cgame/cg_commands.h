@@ -736,7 +736,7 @@ public:
 };
 
 #define MAX_TEMPMODELS 2048
-#define MAX_BEAMS      4096
+#define MAX_BEAMS      16384
 
 class ClientGameCommandManager : public Listener
 {
