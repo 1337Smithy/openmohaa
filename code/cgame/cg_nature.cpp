@@ -89,7 +89,10 @@ void CG_Rain(centity_t *cent)
     int         iRandom;
     float       fDensity;
     vec3_t      vLength;
+    vec_t       vLengthSq;
     const char *shadername;
+    float       fLowerRainDstnce = 1024.0f;
+    vec3_t      vOe2;
 
     fcolor[0] = 1.0;
     fcolor[1] = 1.0;
@@ -168,19 +171,27 @@ void CG_Rain(centity_t *cent)
     }
 
     for (i = 0; i < iNumSpawn; ++i) {
-        iLife     = (int)(vOe[2] / ((float)(iRandom % cg.rain.speed_vary) + cg.rain.speed) * 1000.0);
         vStart[0] = (float)(iRandom % (int)(vOe[0] + 1.0)) + vOmins[0];
         iRandom   = ((214013 * iRandom + 2531011) >> 16) & 0x7FFF;
-        vStart[1] = (float)(iRandom % (int)(vOe[1] + 1.0)) + vOmins[1];
-        vStart[2] = vOmaxs[2];
+        vStart[1] = (float)(iRandom % (int)(vOe[1] + 1.0)) + vOmins[1];     
 
-        if (cg.snap) {
-            vLength[0] = cg.snap->ps.origin[0] - vStart[0];
-            vLength[1] = cg.snap->ps.origin[1] - vStart[1];
-            vLength[2] = 0.0;
-            if (cg.rain.min_dist * cg.rain.min_dist < VectorLengthSquared(vLength)) {
-                continue;
-            }
+        vLength[0] = cg.snap->ps.origin[0] - vStart[0];
+        vLength[1] = cg.snap->ps.origin[1] - vStart[1];
+        vLength[2] = 0.0;
+
+        vLengthSq = VectorLengthSquared(vLength);
+
+        if (cg.rain.min_dist * cg.rain.min_dist < vLengthSq) {
+            continue;
+        }
+
+        if (cg.rain.min_dist > fLowerRainDstnce && fLowerRainDstnce * fLowerRainDstnce < vLengthSq) {
+            vStart[2] = (float)(iRandom % (int)(vOe[2] + 1.0)) + vOmins[2]; // + 128.0f;
+            VectorSubtract(vStart, vOmins, vOe2);
+            iLife     = (int)(vOe2[2] / ((float)(iRandom % cg.rain.speed_vary) + cg.rain.speed) * 1000.0);
+        } else {
+            vStart[2] = vOmaxs[2];
+            iLife     = (int)(vOe[2] / ((float)(iRandom % cg.rain.speed_vary) + cg.rain.speed) * 1000.0);
         }
 
         vEnd[0] = (float)(iRandom % cg.rain.slant) + vStart[0] + vss_wind_x->value;
