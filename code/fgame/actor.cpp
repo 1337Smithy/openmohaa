@@ -4110,7 +4110,7 @@ bool Actor::FriendlyInLineOfFire(Entity *other)
             Vector org;
 
             org = squadDot * inverseDot * delta - squadDelta;
-            if (org * org >= Square(64)) {
+            if (org * org >= Square(128)) { //increased from 64 to 128
                 return true;
             }
         }
