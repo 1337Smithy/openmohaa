@@ -1405,7 +1405,7 @@ void R_Register( void )
 	r_swapInterval = ri.Cvar_Get( "r_swapInterval", "0", CVAR_ARCHIVE );
 	r_gamma = ri.Cvar_Get( "r_gamma", "1", CVAR_ARCHIVE );
 	r_facePlaneCull = ri.Cvar_Get ("r_facePlaneCull", "1", CVAR_ARCHIVE );
-	//	Fixed in 2.30 
+	//	Fixed in OPM
 	//	 Make it archivable and 1 by default
     r_drawstaticdecals = ri.Cvar_Get("r_drawstaticdecals", "1", CVAR_ARCHIVE );
 
