@@ -947,7 +947,8 @@ void UIWindowManager::DeactiveFloatingWindows(void)
 //
 //  Added in OPM
 //
-void UIWindowManager::DeactivateFloatingWindows(str name) {
+void UIWindowManager::DeactiveFloatingWindows(str name)
+{
     int       i;
     UIWidget *pWidg;
 

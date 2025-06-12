@@ -89,7 +89,7 @@ public:
     //
     //  Added in OPM
     //
-    void              DeactivateFloatingWindows(str name);
+    void              DeactiveFloatingWindows(str name);
 
     bool              DialogExists(void);
     void              RemoveAllDialogBoxes(void);
