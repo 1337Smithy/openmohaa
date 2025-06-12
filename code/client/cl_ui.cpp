@@ -2569,11 +2569,9 @@ void UI_PopMenu(qboolean restore_cvars)
 
     //
     //  Added in OPM
-    //   Close any open windows if we are in-game
+    //   Close any floating windows that might be open (e.g. maplist)
     //
-    if (clc.state == CA_ACTIVE) {
-        UI_DeactiveFloatingWindows();
-    }
+    UI_DeactiveFloatingWindows();
 
     if (uWinMan.DialogExists()) {
         uWinMan.RemoveAllDialogBoxes();
