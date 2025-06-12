@@ -85,7 +85,8 @@ public:
     UIWidget         *BindActive(void);
     void              SetBindActive(UIWidget *w);
     virtual void      Shutdown(void) override;
-    void              DeactiveFloatingWindows(void);
+    void              DeactiveFloatingWindows(void);   
+    void              DeactiveFloatingWindows(str name); // Added in OPM
     bool              DialogExists(void);
     void              RemoveAllDialogBoxes(void);
 

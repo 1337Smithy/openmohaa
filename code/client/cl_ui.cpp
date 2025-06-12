@@ -2567,6 +2567,14 @@ void UI_PopMenu(qboolean restore_cvars)
 {
     Menu *menu;
 
+    //
+    //  Added in OPM
+    //   Close any open windows if we are in-game
+    //
+    if (clc.state == CA_ACTIVE) {
+        UI_DeactiveFloatingWindows();
+    }
+
     if (uWinMan.DialogExists()) {
         uWinMan.RemoveAllDialogBoxes();
         return;
@@ -3133,6 +3141,11 @@ UI_MapList_f
 */
 void UI_MapList_f(void)
 {
+    //
+    //  Added in OPM
+    //   Clear any open maplists first, as they can accumulate each time the command is called
+    uWinMan.DeactiveFloatingWindows(MAPLIST_WINDOW_NAME);
+
     str mappath = "maps";
 
     if (Cmd_Argc() == 2) {
